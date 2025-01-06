@@ -1,19 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
-    const navLink = <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">Contact</NavLink>
-        <NavLink to="/">Login</NavLink>
-        <NavLink to="/"></NavLink>
-        
-        
-   
+    const navLink =
+     <div className="flex">
+    <li><Link to="/">Home</Link></li>
+    <li><Link to="/">About</Link></li>
+    <li><Link to="/login">Login</Link></li>
+    <li><Link to="/">Contact</Link></li>
     </div>
     return (
         <div>
-         <div className="navbar bg-base-100">
+         <div className="navbar bg-black text-white">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -36,16 +35,16 @@ const Navbar = () => {
         {navLink}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <a className="btn btn-ghost text-xl">
+      <img className="w-16" src={logo} alt=""/>
+    </a>
   </div>
-  <div className="navbar-center hidden lg:flex">
+  <div className="navbar-end hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
     {navLink}
     </ul>
   </div>
-  <div className="navbar-end">
-    <a className="btn">Button</a>
-  </div>
+  
 </div>   
         </div>
     );
