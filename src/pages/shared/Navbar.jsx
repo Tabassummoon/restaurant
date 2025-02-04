@@ -1,3 +1,4 @@
+import { FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 
@@ -9,6 +10,10 @@ const Navbar = () => {
       <Link to="/ourMenu">Our Menu</Link>
       <Link to="/ourShop">Our Shop</Link>
       <Link to="/dashboard">DashBoard</Link>
+      <Link to="/dashboard/cart">
+        <FaCartShopping className="text-2xl"></FaCartShopping>
+        <div className="badge badge-secondary absolute top-0 mt-2 ml-3">+0</div>
+      </Link>
       <Link to="/login">Login</Link>
       
     </div>
