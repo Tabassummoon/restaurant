@@ -1,9 +1,39 @@
+import { useContext } from "react";
 import PrimaryButton from "../../components/PrimaryButton";
+import { AuthContext } from "../../providers/AuthProvider";
+import usePublic from "../../hooks/usePublic";
+import Swal from "sweetalert2";
+import useCart from "../../hooks/useCart";
 
 const OurShopCard = ({food}) => {
+  const [,refetch] = useCart()
+  const axiosPublic = usePublic()
+  const {user} = useContext(AuthContext)
+  // console.log(user?.email)
   const {name, price, image, recipe, _id} = food;
-  const handleSingleFood =(id) => {
-console.log(id)
+  const handleSingleFood =() => {
+    const foodData = {
+     email: user?.email,
+      foodId: _id,
+        name,
+        image,
+        price
+    }
+ axiosPublic.post('/carts', foodData)
+ .then(res=>{
+  if(res.data.acknowledged){
+ Swal.fire({
+                  position: "top-center",
+                  icon: "success",
+                  title: `${name} add card Successfully!`,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                refetch()
+  }
+  console.log(res)
+ })
+console.log(foodData)
   }
   return (
     <div className="card bg-base-100 w-96 shadow-xl">
@@ -19,7 +49,7 @@ console.log(id)
     <h2 className="card-title">{name}</h2>
     <p>{recipe}</p>
     <div className="card-actions">
-      <button onClick={()=>handleSingleFood(_id)}>
+      <button onClick={handleSingleFood}>
       <PrimaryButton
       title="Add to Cart"
       ></PrimaryButton>

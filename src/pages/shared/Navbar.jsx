@@ -1,21 +1,42 @@
+import { useContext } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import useCart from "../../hooks/useCart";
 
 
 const Navbar = () => {
+  const [cart] = useCart()
+  const {user, logOut} = useContext(AuthContext)
+  console.log(user)
+  const handleLogOut = () =>{
+logOut()
+  }
     const navLink = 
     <div className="flex md:flex-row flex-col gap-5 uppercase text-black md:text-white">  
       <Link to="/">Home</Link>
       <Link to="/contact">Contact Us</Link>
       <Link to="/ourMenu">Our Menu</Link>
       <Link to="/ourShop">Our Shop</Link>
-      <Link to="/dashboard">DashBoard</Link>
+      {
+        user? 
+<Link to="/dashboard">DashBoard</Link>
+        :
+        <></>
+      }
+      
       <Link to="/dashboard/cart">
         <FaCartShopping className="text-2xl"></FaCartShopping>
-        <div className="badge badge-secondary absolute top-0 mt-2 ml-3">+0</div>
+        <div className="badge badge-secondary absolute top-0 mt-2 ml-3">+{cart.length}</div>
       </Link>
-      <Link to="/login">Login</Link>
+      {
+        user? 
+        <button onClick={handleLogOut} className="text-sm uppercase">LogOut</button>
+        :
+        <Link to="/login">Login</Link>
+      }
       
+       
     </div>
   return (
     <div className="bg-black bg-opacity-30 fixed z-10 w-full">
