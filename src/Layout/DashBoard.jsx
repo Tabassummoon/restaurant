@@ -23,10 +23,7 @@ const DashBoard = () => {
             <IoLogOut className="text-white"></IoLogOut>
            <NavLink className="text-white text-2xl" to="">Logout</NavLink>
           </li>
-          <li className="flex justify-center items-ceter gap-3">
-            <IoLogOut className="text-white"></IoLogOut>
-           <NavLink className="text-white text-2xl" to="todo">Todo</NavLink>
-          </li>
+          
   
     </div>
     <div>
